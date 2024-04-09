@@ -4,13 +4,15 @@ module.exports = [
   'strapi::logger',
   'strapi::errors',
   'strapi::security',
-  'strapi::cors',
-  // {
-  //   name: 'strapi::cors',
-  //   config: {
-  //     origin: env('CORS_ORIGIN').split(',')
-  //   },
-  // },
+  {
+    name: 'strapi::cors',
+    config: {
+      origin: env('NODE_ENV') === 'production' ? 'https://test-deploy-vercel-klrhnvje1-danieldev200s-projects.vercel.app' : '*',
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
+      headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
+      keepHeaderOnError: true,
+    },
+  },
   'strapi::poweredBy',
   'strapi::query',
   'strapi::body',
